@@ -1,0 +1,16 @@
+# Ignore zip files
+*.zip
+
+# Ignore editor/IDE folders
+.vscode/
+.idea/
+
+# Windows thumbnail cache
+Thumbs.db
+desktop.ini
+
+# macOS/Linux system files
+.DS_Store
+
+# Node modules (if ever used)
+node_modules/
