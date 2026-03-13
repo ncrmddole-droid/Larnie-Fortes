@@ -4,9 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Larnie Fortes Batolina - Web Developer Portfolio featuring Laravel projects and web applications">
-    <title>Larnie Fortes Batolina — Web Developer Portfolio</title>
+    <meta name="description" content="Larnie Fortes Batolina - Creative Designer and Web Developer Portfolio">
+    <title>Larnie Fortes Batolina — Creative Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=League+Spartan:wght@500;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="port.css">
     <script src="portfolio.js" defer></script>
 </head>
@@ -14,50 +19,147 @@
 <body>
 
     <!-- Navigation -->
-    <nav>
+    <nav id="navbar">
         <div class="nav-content">
-            <a href="index.html" class="logo">Larnie Fortes Batolina</a>
+            <a href="#home" class="logo">Larnie Fortes Batolina <span class="star-icon">✦</span></a>
+            <button class="hamburger" aria-label="Toggle Navigation">
+                <span></span><span></span><span></span>
+            </button>
             <ul class="nav-links">
-                <li><a href="index.html">Featured</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <section class="featured-section">
-        <div class="container">
-
-            <div class="projects-grid">
-                <a href="project-detail.html?project=1" class="project-card">
-                    <div class="project-image">
-                        <img src="images/1/1.jfif" alt="Project 1">
-                    </div>
-                    <div class="project-info">
-                        <h3>Project 1</h3>
-                        <p>Registrar module with enrollment approval</p>
-                    </div>
-                </a>
-
-                <a href="project-detail.html?project=2" class="project-card">
-                    <div class="project-image">
-                        <img src="images/2/1.jfif" alt="Project 2">
-                    </div>
-                    <div class="project-info">
-                        <h3>Project 2</h3>
-                        <p>Personal responsive portfolio</p>
-                    </div>
-                </a>
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">I design creative & visually engaging pages that stick.</h1>
+                    <p class="hero-subtitle">Plus, I create compelling visual content that effectively communicates
+                        ideas and captures attention.</p>
+                    <a href="#contact" class="btn-primary">WORK WITH ME</a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="browser-mockup bg-sage">
+                    <div class="browser-header">
+                        <span class="dot bg-red"></span>
+                        <span class="dot bg-yellow"></span>
+                        <span class="dot bg-green"></span>
+                    </div>
+                    <div class="browser-content">
+                        <h2>Hi, Larnie here!</h2>
+                        <p>I’m an Electronics and Communication Engineering (ECE) student passionate about designing
+                            creative and visually engaging pages, as well as video and photo editing. I focus on
+                            creating clean layouts and compelling visual content that effectively communicate ideas and
+                            capture attention.</p>
+                        <p>I blend engineering principles with web development to build responsive and user-friendly
+                            digital experiences.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services-section">
+            <div class="container text-center">
+                <h2 class="section-title">What I Can Do for You</h2>
+                <div class="services-grid">
+                    <div class="service-pill">Creative Page Design</div>
+                    <div class="service-pill">Photo & Video Editing</div>
+                    <div class="service-pill">Visual Content Creation</div>
+                    <div class="service-pill">Layout Design</div>
+                    <div class="service-pill">Web Development</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="portfolio-section bg-purple">
+            <div class="container">
+                <h2 class="section-title text-light">Projects & Works</h2>
+
+                <div class="browser-mockup bg-sage mt-4 animate-in">
+                    <div class="browser-header">
+                        <span class="dot bg-red"></span>
+                        <span class="dot bg-yellow"></span>
+                        <span class="dot bg-green"></span>
+                    </div>
+                    <div class="browser-content p-0">
+                        <div class="projects-grid">
+                            <a href="project-detail.html?project=1" class="project-card">
+                                <div class="project-image">
+                                    <img src="images/1/1.jfif" alt="Project 1">
+                                </div>
+                                <div class="project-info">
+                                    <h3>Registrar Module</h3>
+                                    <p>Enrollment approval, document request system, and audit logs.</p>
+                                </div>
+                            </a>
+
+                            <a href="project-detail.html?project=2" class="project-card">
+                                <div class="project-image">
+                                    <img src="images/2/1.jfif" alt="Project 2">
+                                </div>
+                                <div class="project-info">
+                                    <h3>Personal Portfolio</h3>
+                                    <p>Responsive portfolio built using HTML, CSS, and JavaScript.</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <div class="contact-image-frame">
+                        <img src="larnie.png" alt="Larnie Fortes Batolina"
+                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'300\'><rect width=\'300\' height=\'300\' fill=\'#D276BC\'/></svg>'">
+                    </div>
+                    <div class="contact-info">
+                        <h2 class="section-title">Let's Connect!</h2>
+                        <p>I'm always interested in hearing about new projects, collaborations, or just having a chat
+                            about tech and design.</p>
+                        <div class="contact-methods">
+                            <a href="mailto:forteslarnie@gmail.com" class="contact-btn">
+                                <span class="icon">✉</span> forteslarnie@gmail.com
+                            </a>
+                            <a href="tel:09945512811" class="contact-btn">
+                                <span class="icon">☏</span> 09945512811
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>© 2026 Larnie Fortes Batolina. All rights reserved.</p>
+            <div class="footer-content">
+                <p>© 2026 Larnie Fortes Batolina. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Terms & Support</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
         </div>
     </footer>
 

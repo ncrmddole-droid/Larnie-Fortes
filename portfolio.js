@@ -19,7 +19,7 @@ function initializeAll() {
     initTypingEffect();
     initScrollAnimations();
     initNavbarScroll();
-    initParticles();
+    // initParticles(); // Disabled per user request
     initMobileMenu();
     initProjectCards();
     initSmoothScroll();
@@ -27,16 +27,16 @@ function initializeAll() {
 
 // ===== TYPING EFFECT =====
 function initTypingEffect() {
-    const elements = document.querySelectorAll('.subtitle, .description');
-    
+    const elements = document.querySelectorAll('.hero-subtitle, .description');
+
     elements.forEach(element => {
         const text = element.textContent;
         element.textContent = '';
         element.style.opacity = '1';
-        
+
         let index = 0;
         const speed = 50; // milliseconds per character
-        
+
         function typeWriter() {
             if (index < text.length) {
                 element.textContent += text.charAt(index);
@@ -44,7 +44,7 @@ function initTypingEffect() {
                 setTimeout(typeWriter, speed);
             }
         }
-        
+
         // Start typing after a delay
         setTimeout(typeWriter, 500);
     });
@@ -61,7 +61,7 @@ function initScrollAnimations() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate-in');
-                
+
                 // Stagger animation for grid items
                 if (entry.target.classList.contains('projects-grid')) {
                     const cards = entry.target.querySelectorAll('.project-card');
@@ -76,7 +76,7 @@ function initScrollAnimations() {
     }, observerOptions);
 
     // Observe sections and elements
-    const elementsToAnimate = document.querySelectorAll('.section, .hero, .featured-section, .projects-grid, .page-section');
+    const elementsToAnimate = document.querySelectorAll('section, .projects-grid');
     elementsToAnimate.forEach(el => observer.observe(el));
 }
 
@@ -84,31 +84,31 @@ function initScrollAnimations() {
 function initNavbarScroll() {
     const nav = document.querySelector('nav');
     let lastScrollTop = 0;
-    
+
     window.addEventListener('scroll', () => {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
+
         // Add shadow when scrolled
         if (scrollTop > 50) {
             nav.classList.add('scrolled');
         } else {
             nav.classList.remove('scrolled');
         }
-        
+
         // Hide/show navbar on scroll (optional)
         if (scrollTop > lastScrollTop && scrollTop > 100) {
             nav.style.transform = 'translateY(-100%)';
         } else {
             nav.style.transform = 'translateY(0)';
         }
-        
+
         lastScrollTop = scrollTop;
     });
 }
 
 // ===== PARTICLE BACKGROUND =====
 function initParticles() {
-    const hero = document.querySelector('.hero, .featured-section');
+    const hero = document.querySelector('.hero-section');
     if (!hero) return;
 
     const canvas = document.createElement('canvas');
@@ -120,7 +120,7 @@ function initParticles() {
     canvas.style.height = '100%';
     canvas.style.pointerEvents = 'none';
     canvas.style.zIndex = '1';
-    
+
     hero.style.position = 'relative';
     hero.insertBefore(canvas, hero.firstChild);
 
@@ -167,17 +167,17 @@ function initParticles() {
 
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
+
         for (let i = 0; i < particlesArray.length; i++) {
             particlesArray[i].update();
             particlesArray[i].draw();
-            
+
             // Connect particles
             for (let j = i; j < particlesArray.length; j++) {
                 const dx = particlesArray[i].x - particlesArray[j].x;
                 const dy = particlesArray[i].y - particlesArray[j].y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                
+
                 if (distance < 100) {
                     ctx.strokeStyle = `rgba(26, 26, 26, ${0.1 * (1 - distance / 100)})`;
                     ctx.lineWidth = 1;
@@ -188,7 +188,7 @@ function initParticles() {
                 }
             }
         }
-        
+
         requestAnimationFrame(animate);
     }
 
@@ -206,27 +206,17 @@ function initParticles() {
 function initMobileMenu() {
     const nav = document.querySelector('nav');
     const navLinks = document.querySelector('.nav-links');
-    
-    // Create hamburger button
-    const hamburger = document.createElement('button');
-    hamburger.className = 'hamburger';
-    hamburger.innerHTML = `
-        <span></span>
-        <span></span>
-        <span></span>
-    `;
-    hamburger.setAttribute('aria-label', 'Toggle menu');
-    
-    const navContent = document.querySelector('.nav-content');
-    navContent.appendChild(hamburger);
-    
+    const hamburger = document.querySelector('.hamburger');
+
+    if (!hamburger || !navLinks) return;
+
     // Toggle menu
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         navLinks.classList.toggle('active');
         document.body.classList.toggle('menu-open');
     });
-    
+
     // Close menu when clicking on a link
     const links = navLinks.querySelectorAll('a');
     links.forEach(link => {
@@ -241,41 +231,41 @@ function initMobileMenu() {
 // ===== PROJECT CARDS INTERACTION =====
 function initProjectCards() {
     const cards = document.querySelectorAll('.project-card');
-    
+
     cards.forEach(card => {
         // Add tilt effect on mouse move
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
+
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            
+
             const rotateX = (y - centerY) / 20;
             const rotateY = (centerX - x) / 20;
-            
+
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
         });
-        
+
         card.addEventListener('mouseleave', () => {
             card.style.transform = '';
         });
-        
+
         // Add ripple effect on click
         card.addEventListener('click', (e) => {
             const ripple = document.createElement('span');
             ripple.className = 'ripple';
-            
+
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
+
             ripple.style.left = `${x}px`;
             ripple.style.top = `${y}px`;
-            
+
             card.appendChild(ripple);
-            
+
             setTimeout(() => {
                 ripple.remove();
             }, 600);
@@ -286,19 +276,19 @@ function initProjectCards() {
 // ===== SMOOTH SCROLL =====
 function initSmoothScroll() {
     const links = document.querySelectorAll('a[href^="#"]');
-    
+
     links.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const href = link.getAttribute('href');
-            
+
             if (href === '#') return;
-            
+
             const target = document.querySelector(href);
             if (target) {
                 const navHeight = document.querySelector('nav').offsetHeight;
                 const targetPosition = target.offsetTop - navHeight;
-                
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
@@ -313,7 +303,7 @@ function initCursorTrail() {
     const coords = { x: 0, y: 0 };
     const circles = [];
     const colors = ['#1a1a1a', '#6b6b6b', '#999'];
-    
+
     for (let i = 0; i < 20; i++) {
         const circle = document.createElement('div');
         circle.className = 'cursor-circle';
@@ -321,29 +311,29 @@ function initCursorTrail() {
         document.body.appendChild(circle);
         circles.push(circle);
     }
-    
+
     document.addEventListener('mousemove', (e) => {
         coords.x = e.clientX;
         coords.y = e.clientY;
     });
-    
+
     function animateCircles() {
         let x = coords.x;
         let y = coords.y;
-        
+
         circles.forEach((circle, index) => {
             circle.style.left = `${x - 12}px`;
             circle.style.top = `${y - 12}px`;
             circle.style.transform = `scale(${(circles.length - index) / circles.length})`;
-            
+
             const nextCircle = circles[index + 1] || circles[0];
             x += (parseFloat(nextCircle.style.left) - x) * 0.3;
             y += (parseFloat(nextCircle.style.top) - y) * 0.3;
         });
-        
+
         requestAnimationFrame(animateCircles);
     }
-    
+
     animateCircles();
 }
 
@@ -355,7 +345,7 @@ function initScrollProgress() {
     const progressBar = document.createElement('div');
     progressBar.className = 'scroll-progress';
     document.body.appendChild(progressBar);
-    
+
     window.addEventListener('scroll', () => {
         const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (window.scrollY / windowHeight) * 100;
